@@ -6,6 +6,14 @@ import { ResultsPanel } from './results-panel';
 import { useQuestSpeech } from '../../hooks/useQuestSpeech';
 import { useActiveTask, useChallengeStore } from '../../store/useChallengeStore';
 
+const taskExampleImages = import.meta.glob('../../assets/tasks-examples-image/*/*.{png,jpg,jpeg,webp,avif,gif,svg}', {
+  eager: true,
+  import: 'default',
+}) as Record<string, string>;
+
+const buildExampleImagePath = (taskId: string, exampleIndex: number) =>
+  `../../assets/tasks-examples-image/${taskId}/${exampleIndex + 1}.png`;
+
 export function TaskPanel() {
   const task = useActiveTask();
   const tasks = useChallengeStore((s) => s.tasks);
@@ -104,12 +112,18 @@ export function TaskPanel() {
                 <Text size="2" weight="bold">
                   Examples
                 </Text>
-                {task.examples.map((example, idx) => (
-                  <Card key={`${task.id}-example-${idx}`} variant="surface">
-                    <Text size="1">Input: {example.input} </Text>
-                    <Text size="1">Output: {example.output}</Text>
-                  </Card>
-                ))}
+                {task.examples.map((example, idx) => {
+                  const imageKey = buildExampleImagePath(task.id, idx);
+                  const imageSrc = taskExampleImages[imageKey];
+
+                  return (
+                    <Card key={`${task.id}-example-${idx}`} variant="surface">
+                      <Text size="1">Input: {example.input} </Text>
+                      <Text size="1">Output: {example.output}</Text>
+                      {imageSrc ? <img className="task-example-image" src={imageSrc} alt={`${task.title} example ${idx + 1}`} /> : null}
+                    </Card>
+                  );
+                })}
 
                 <Text size="2" weight="bold">
                   Constraints

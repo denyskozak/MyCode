@@ -103,3 +103,13 @@ body {
   grid-template-columns: 1fr 1fr;
   border-bottom: 1px solid #334155;
 }
+
+.task-example-image {
+  display: block;
+  width: 100%;
+  max-width: 480px;
+  height: auto;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+}
