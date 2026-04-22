@@ -3,6 +3,7 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import * as Tabs from '@radix-ui/react-tabs';
 import { Box, Button, Card, Flex, ScrollArea, Separator, Text } from '@radix-ui/themes';
 import { ResultsPanel } from './results-panel';
+import { useQuestSpeech } from '../../hooks/useQuestSpeech';
 import { useActiveTask, useChallengeStore } from '../../store/useChallengeStore';
 
 export function TaskPanel() {
@@ -15,8 +16,22 @@ export function TaskPanel() {
   const isHintsOpen = useChallengeStore((s) => s.isHintsOpen);
   const setHintsOpen = useChallengeStore((s) => s.setHintsOpen);
   const progress = useChallengeStore((s) => s.progress);
+  const speech = useQuestSpeech();
 
   if (!task) return null;
+
+  const speechText = [
+    `Quest: ${task.title}`,
+    task.descriptionShort,
+    `Objective: ${task.objective}`,
+    `Story: ${task.narrative}`,
+    task.examples.length
+      ? `Examples: ${task.examples.map((example, idx) => `Example ${idx + 1}. Input ${example.input}. Output ${example.output}.`).join(' ')}`
+      : '',
+    task.hints.length ? `Hints: ${task.hints.join('. ')}` : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   return (
     <Card style={{ height: '100%' }}>
@@ -32,6 +47,23 @@ export function TaskPanel() {
             <Text as="p" size="2" mt="1">
               {task.descriptionShort}
             </Text>
+            <Flex gap="2" mt="2" wrap="wrap">
+              <Button size="1" variant="soft" disabled={!speech.supported} onClick={() => speech.speak(speechText)}>
+                Read Quest
+              </Button>
+              <Button size="1" variant="soft" disabled={!speech.supported || !speech.speaking || speech.paused} onClick={speech.pause}>
+                Pause
+              </Button>
+              <Button size="1" variant="soft" disabled={!speech.supported || !speech.paused} onClick={speech.resume}>
+                Resume
+              </Button>
+              <Button size="1" variant="soft" disabled={!speech.supported || (!speech.speaking && !speech.paused)} onClick={speech.stop}>
+                Stop
+              </Button>
+              <Text size="1" color="gray">
+                Speech: {!speech.supported ? 'unsupported' : speech.paused ? 'paused' : speech.speaking ? 'speaking' : 'idle'}
+              </Text>
+            </Flex>
           </Box>
           <DropdownMenu.Root>
             <DropdownMenu.Trigger asChild>

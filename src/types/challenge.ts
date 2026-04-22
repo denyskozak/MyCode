@@ -35,22 +35,25 @@ export interface ChallengeTask {
   solution: ComplexityMeta;
 }
 
-export type RunStatus = 'idle' | 'running' | 'passed' | 'partial' | 'runtime_error' | 'timeout' | 'accepted';
+export type RunStatus = 'idle' | 'running' | 'accepted' | 'failed' | 'runtime_error' | 'timeout';
 
-export interface TestResultItem {
-  id: string;
-  input: string;
-  expected: string;
-  actual?: string;
-  passed: boolean;
-  hidden?: boolean;
-  error?: string;
-}
+export type RunnerLog = {
+  level: 'log' | 'warn' | 'error';
+  message: string;
+};
 
-export interface RunResult {
+export type FailedCase = {
+  input: unknown;
+  expected: unknown;
+  actual: unknown;
+};
+
+export type RunResult = {
   status: RunStatus;
-  passedCount: number;
-  totalCount: number;
-  details: TestResultItem[];
-  error?: string;
-}
+  passed: number;
+  total: number;
+  durationMs: number;
+  failedCase?: FailedCase;
+  errorMessage?: string;
+  logs: RunnerLog[];
+};

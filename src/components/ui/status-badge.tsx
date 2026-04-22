@@ -4,11 +4,10 @@ import { RunStatus } from '../../types/challenge';
 const colorByStatus: Record<RunStatus, 'gray' | 'blue' | 'green' | 'amber' | 'red' | 'orange'> = {
   idle: 'gray',
   running: 'blue',
-  passed: 'green',
-  partial: 'amber',
+  accepted: 'green',
+  failed: 'amber',
   runtime_error: 'red',
   timeout: 'orange',
-  accepted: 'green',
 };
 
 export function StatusBadge({ status }: { status: RunStatus }) {
