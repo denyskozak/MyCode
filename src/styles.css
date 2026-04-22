@@ -6,6 +6,18 @@ body,
   background: #0b1220;
 }
 
+html {
+  font-size: 17px;
+}
+
+body {
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'tnum' 1;
+}
+
 .dialog-overlay {
   position: fixed;
   inset: 0;
@@ -36,8 +48,11 @@ body,
   border: 0;
   background: transparent;
   color: #cbd5e1;
-  padding: 10px;
+  padding: 12px 14px;
   cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 .tabs-trigger[data-state='active'] {
@@ -57,10 +72,11 @@ body,
 }
 
 .dropdown-item {
-  padding: 8px;
+  padding: 10px;
   border-radius: 6px;
   color: #e2e8f0;
   cursor: pointer;
+  line-height: 1.45;
 }
 
 .dropdown-item:hover {
