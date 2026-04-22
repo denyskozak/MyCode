@@ -1,7 +1,6 @@
-'use client';
-
 import Editor from '@monaco-editor/react';
-import { useActiveCode, useChallengeStore } from '@/store/useChallengeStore';
+import { Card } from '@radix-ui/themes';
+import { useActiveCode, useChallengeStore } from '../../store/useChallengeStore';
 
 export function MonacoEditorPanel() {
   const activeTaskId = useChallengeStore((s) => s.activeTaskId);
@@ -9,7 +8,7 @@ export function MonacoEditorPanel() {
   const updateCode = useChallengeStore((s) => s.updateCode);
 
   return (
-    <div className="h-full min-h-[420px] overflow-hidden rounded-lg border border-border bg-[#0f172a]">
+    <Card style={{ height: '100%', minHeight: 420, overflow: 'hidden' }}>
       <Editor
         height="100%"
         defaultLanguage="typescript"
@@ -23,14 +22,13 @@ export function MonacoEditorPanel() {
           lineNumbers: 'on',
           bracketPairColorization: { enabled: true },
           automaticLayout: true,
-          tabSize: 2,
-          formatOnType: true,
-          formatOnPaste: true,
           quickSuggestions: true,
           suggestOnTriggerCharacters: true,
+          formatOnPaste: true,
+          formatOnType: true,
           scrollBeyondLastLine: false,
         }}
       />
-    </div>
+    </Card>
   );
 }

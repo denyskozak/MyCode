@@ -1,0 +1,84 @@
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  background: #0b1220;
+}
+
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.dialog-content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(92vw, 420px);
+  background: #111827;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 16px;
+  display: grid;
+  gap: 8px;
+}
+
+.tabs-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid #334155;
+}
+
+.tabs-trigger {
+  border: 0;
+  background: transparent;
+  color: #cbd5e1;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.tabs-trigger[data-state='active'] {
+  background: #1f2937;
+}
+
+.tabs-content {
+  min-height: 0;
+}
+
+.dropdown-content {
+  min-width: 220px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 6px;
+}
+
+.dropdown-item {
+  padding: 8px;
+  border-radius: 6px;
+  color: #e2e8f0;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background: #1f2937;
+}
+
+.progress-root {
+  position: relative;
+  overflow: hidden;
+  background: #334155;
+  border-radius: 999px;
+  width: 100%;
+  height: 8px;
+}
+
+.progress-indicator {
+  width: 100%;
+  height: 100%;
+  background: #34d399;
+  transition: transform 0.2s;
+}

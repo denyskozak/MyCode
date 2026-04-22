@@ -1,30 +1,12 @@
-import { ChallengeTask, RunResult, TestCase } from '@/types/challenge';
+import { ChallengeTask, RunResult, TestCase } from '../types/challenge';
 
 const evaluatePseudo = (code: string, fnName: string, test: TestCase, index: number) => {
   const hasFunction = code.includes(`function ${fnName}`);
   const isStub = code.includes('// your code here');
 
-  if (!hasFunction) {
-    return {
-      passed: false,
-      actual: 'runtime_error',
-      error: `Missing function ${fnName}.`,
-    };
-  }
-
-  if (isStub) {
-    return {
-      passed: index === 0,
-      actual: index === 0 ? test.expected : 'mismatch',
-      error: index === 0 ? undefined : 'Output did not match expected value.',
-    };
-  }
-
-  return {
-    passed: true,
-    actual: test.expected,
-    error: undefined,
-  };
+  if (!hasFunction) return { passed: false, actual: 'runtime_error', error: `Missing function ${fnName}.` };
+  if (isStub) return { passed: index === 0, actual: index === 0 ? test.expected : 'mismatch', error: index === 0 ? undefined : 'Output did not match expected value.' };
+  return { passed: true, actual: test.expected, error: undefined };
 };
 
 export const executeTask = async (task: ChallengeTask, code: string, includeHidden = false): Promise<RunResult> => {
@@ -68,10 +50,5 @@ export const executeTask = async (task: ChallengeTask, code: string, includeHidd
     };
   }
 
-  return {
-    status: passedCount === suite.length ? 'passed' : 'partial',
-    passedCount,
-    totalCount: suite.length,
-    details,
-  };
+  return { status: passedCount === suite.length ? 'passed' : 'partial', passedCount, totalCount: suite.length, details };
 };

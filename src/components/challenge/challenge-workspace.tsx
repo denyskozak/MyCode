@@ -1,11 +1,10 @@
-'use client';
-
 import { useEffect } from 'react';
-import { ActionBar } from '@/components/challenge/action-bar';
-import { MonacoEditorPanel } from '@/components/challenge/monaco-editor-panel';
-import { ResultsPanel } from '@/components/challenge/results-panel';
-import { TaskPanel } from '@/components/challenge/task-panel';
-import { useChallengeStore } from '@/store/useChallengeStore';
+import { Grid } from '@radix-ui/themes';
+import { ActionBar } from './action-bar';
+import { MonacoEditorPanel } from './monaco-editor-panel';
+import { ResultsPanel } from './results-panel';
+import { TaskPanel } from './task-panel';
+import { useChallengeStore } from '../../store/useChallengeStore';
 
 export function ChallengeWorkspace() {
   const runCode = useChallengeStore((s) => s.runCode);
@@ -28,16 +27,13 @@ export function ChallengeWorkspace() {
   }, [runCode, submitCode]);
 
   return (
-    <section className="grid flex-1 gap-4 lg:grid-cols-[minmax(360px,40%)_1fr]">
+    <Grid columns={{ initial: '1', lg: '40% 1fr' }} gap="3" style={{ minHeight: '90vh' }}>
       <TaskPanel />
-
-      <div className="flex min-h-[70vh] flex-col gap-3">
+      <div style={{ display: 'grid', gap: 12, minHeight: '70vh', gridTemplateRows: 'auto 1fr auto' }}>
         <ActionBar />
-        <div className="min-h-0 flex-1">
-          <MonacoEditorPanel />
-        </div>
+        <MonacoEditorPanel />
         <ResultsPanel />
       </div>
-    </section>
+    </Grid>
   );
 }
