@@ -82,3 +82,8 @@ body,
   background: #34d399;
   transition: transform 0.2s;
 }
+
+.tabs-list-compact {
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid #334155;
+}
