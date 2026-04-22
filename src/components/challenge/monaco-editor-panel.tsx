@@ -56,7 +56,7 @@ export function MonacoEditorPanel() {
         onChange={(value) => updateCode(activeTaskId, value ?? '')}
         options={{
           minimap: { enabled: false },
-          fontSize: 14,
+          fontSize: 16,
           lineNumbers: 'on',
           bracketPairColorization: { enabled: true },
           automaticLayout: true,
