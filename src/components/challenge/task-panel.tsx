@@ -106,7 +106,7 @@ export function TaskPanel() {
                 </Text>
                 {task.examples.map((example, idx) => (
                   <Card key={`${task.id}-example-${idx}`} variant="surface">
-                    <Text size="1">Input: {example.input}</Text>
+                    <Text size="1">Input: {example.input} </Text>
                     <Text size="1">Output: {example.output}</Text>
                   </Card>
                 ))}

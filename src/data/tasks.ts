@@ -14,9 +14,9 @@ export const challengeTasks: ChallengeTask[] = [
     functionName: 'twoSum',
     signature: 'twoSum(nums: number[], target: number): number[]',
     examples: [
-      { input: 'nums=[2,7,11,15], target=9', output: '[0,1]' },
-      { input: 'nums=[3,2,4], target=6', output: '[1,2]' },
-      { input: 'nums=[3,3], target=6', output: '[0,1]' },
+      { input: 'nums = [2,7,11,15], target = 9', output: '[0,1]' },
+      { input: 'nums = [3,2,4], target = 6', output: '[1,2]' },
+      { input: 'nums = [3,3], target = 6', output: '[0,1]' },
     ],
     constraints: ['2 <= nums.length', '-1e9 <= nums[i], target <= 1e9', 'Exactly one valid answer'],
     hints: [
